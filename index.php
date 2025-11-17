@@ -12,64 +12,214 @@ if (!$user && $_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-$templates = [
-    'portfolio' => [
-        'label' => 'Portfolio',
-        'description' => 'Showcase your projects and background.',
-        'fields' => [
-            ['name' => 'portfolio_about', 'label' => 'About blurb', 'type' => 'textarea', 'placeholder' => 'Short introduction.'],
-            ['name' => 'portfolio_projects', 'label' => 'Projects (one per line as Title | Description | Link)', 'type' => 'textarea', 'placeholder' => 'Project One | What it does | https://example.com'],
+$templatePresets = [
+    'general_page' => [
+        'label' => 'General Page',
+        'description' => 'Your Journey Starts Here',
+        'defaults' => [
+            'hero_title' => 'Welcome to Our Platform',
+            'hero_subtitle' => 'Your Journey Starts Here',
+            'hero_description' => 'Discover amazing features and possibilities with our comprehensive platform designed for your success.',
+            'feature1_title' => 'Easy to Use',
+            'feature1_desc' => 'Intuitive interface designed for everyone, no technical knowledge required.',
+            'feature1_emoji' => '🎯',
+            'feature2_title' => 'Fast & Reliable',
+            'feature2_desc' => 'Lightning-fast performance with 99.9% uptime guarantee.',
+            'feature2_emoji' => '⚡',
+            'feature3_title' => 'Secure',
+            'feature3_desc' => 'Enterprise-grade security to keep your data safe and protected.',
+            'feature3_emoji' => '🔒',
+            'cta_title' => 'Ready to Get Started?',
+            'cta_button_text' => 'Get Started Now',
         ],
     ],
-    'contact' => [
-        'label' => 'Contact',
-        'description' => 'Contact details and quick call-to-actions.',
-        'fields' => [
-            ['name' => 'contact_email', 'label' => 'Contact email', 'type' => 'text'],
-            ['name' => 'contact_phone', 'label' => 'Phone number', 'type' => 'text'],
-            ['name' => 'contact_address', 'label' => 'Address', 'type' => 'textarea'],
-            ['name' => 'contact_message', 'label' => 'Headline message', 'type' => 'text'],
+    'service_page' => [
+        'label' => 'Service Page',
+        'description' => 'Excellence in Every Detail',
+        'defaults' => [
+            'hero_title' => 'Professional Services',
+            'hero_subtitle' => 'Excellence in Every Detail',
+            'hero_description' => 'We provide top-tier professional services tailored to meet your unique business needs and objectives.',
+            'feature1_title' => 'Expert Team',
+            'feature1_desc' => 'Certified professionals with years of industry experience.',
+            'feature1_emoji' => '👥',
+            'feature2_title' => 'Custom Solutions',
+            'feature2_desc' => 'Tailored approaches designed specifically for your business.',
+            'feature2_emoji' => '🎨',
+            'feature3_title' => '24/7 Support',
+            'feature3_desc' => 'Round-the-clock customer service whenever you need assistance.',
+            'feature3_emoji' => '💬',
+            'cta_title' => 'Need Our Services?',
+            'cta_button_text' => 'Contact Us Today',
         ],
     ],
-    'imprint_privacy' => [
-        'label' => 'Imprint / Privacy',
-        'description' => 'Display legal imprint and privacy notice.',
-        'fields' => [
-            ['name' => 'imprint_body', 'label' => 'Imprint content', 'type' => 'textarea'],
-            ['name' => 'privacy_body', 'label' => 'Privacy policy', 'type' => 'textarea'],
+    'product_page' => [
+        'label' => 'Product Page',
+        'description' => 'Innovation Meets Quality',
+        'defaults' => [
+            'hero_title' => 'Our Premium Product',
+            'hero_subtitle' => 'Innovation Meets Quality',
+            'hero_description' => 'Experience the perfect blend of cutting-edge technology and user-friendly design in our flagship product.',
+            'feature1_title' => 'Latest Technology',
+            'feature1_desc' => 'Built with the most advanced tech stack available today.',
+            'feature1_emoji' => '🚀',
+            'feature2_title' => 'User Friendly',
+            'feature2_desc' => 'Designed with simplicity and ease of use as top priorities.',
+            'feature2_emoji' => '✨',
+            'feature3_title' => 'Great Value',
+            'feature3_desc' => 'Premium quality at competitive prices with no hidden costs.',
+            'feature3_emoji' => '💎',
+            'cta_title' => 'Ready to Purchase?',
+            'cta_button_text' => 'Buy Now',
         ],
     ],
-    'product' => [
-        'label' => 'Product',
-        'description' => 'Highlight a product with features and pricing.',
-        'fields' => [
-            ['name' => 'product_name', 'label' => 'Product name', 'type' => 'text'],
-            ['name' => 'product_description', 'label' => 'Description', 'type' => 'textarea'],
-            ['name' => 'product_features', 'label' => 'Features (one per line)', 'type' => 'textarea'],
-            ['name' => 'product_price', 'label' => 'Price display', 'type' => 'text'],
+    'about_page' => [
+        'label' => 'About Page',
+        'description' => 'Our Story & Mission',
+        'defaults' => [
+            'hero_title' => 'About Us',
+            'hero_subtitle' => 'Our Story & Mission',
+            'hero_description' => 'Learn about our journey, values, and the passionate team working every day to deliver exceptional results.',
+            'feature1_title' => 'Our Mission',
+            'feature1_desc' => 'To empower businesses and individuals through innovative solutions.',
+            'feature1_emoji' => '🎯',
+            'feature2_title' => 'Our Vision',
+            'feature2_desc' => 'Creating a future where technology serves everyone seamlessly.',
+            'feature2_emoji' => '🌟',
+            'feature3_title' => 'Our Values',
+            'feature3_desc' => 'Integrity, innovation, and customer satisfaction drive everything we do.',
+            'feature3_emoji' => '💡',
+            'cta_title' => 'Want to Join Us?',
+            'cta_button_text' => 'View Careers',
         ],
     ],
-    'pricing' => [
-        'label' => 'Pricing',
-        'description' => 'List multiple pricing plans.',
-        'fields' => [
-            ['name' => 'pricing_plans', 'label' => 'Plans (one per line as Name | Price | Features separated by ; )', 'type' => 'textarea'],
-            ['name' => 'pricing_cta', 'label' => 'Shared call-to-action', 'type' => 'text'],
+    'contact_page' => [
+        'label' => 'Contact Page',
+        'description' => "We'd Love to Hear From You",
+        'defaults' => [
+            'hero_title' => 'Get in Touch',
+            'hero_subtitle' => "We'd Love to Hear From You",
+            'hero_description' => 'Have questions or feedback? Our team is here to help and ready to assist you with anything you need.',
+            'feature1_title' => 'Fast Response',
+            'feature1_desc' => 'We typically respond within 24 hours on business days.',
+            'feature1_emoji' => '⏱️',
+            'feature2_title' => 'Multiple Channels',
+            'feature2_desc' => 'Reach us via email, phone, or social media platforms.',
+            'feature2_emoji' => '📱',
+            'feature3_title' => 'Expert Support',
+            'feature3_desc' => 'Our knowledgeable team is ready to solve your problems.',
+            'feature3_emoji' => '🎓',
+            'cta_title' => 'Ready to Connect?',
+            'cta_button_text' => 'Send Message',
         ],
     ],
-    'about' => [
-        'label' => 'About',
-        'description' => 'Simple about page with highlights.',
-        'fields' => [
-            ['name' => 'about_story', 'label' => 'Story', 'type' => 'textarea'],
-            ['name' => 'about_highlights', 'label' => 'Highlights (one per line)', 'type' => 'textarea'],
+    'legal_page' => [
+        'label' => 'Legal Page',
+        'description' => 'Terms, Privacy & Compliance',
+        'defaults' => [
+            'hero_title' => 'Legal Information',
+            'hero_subtitle' => 'Terms, Privacy & Compliance',
+            'hero_description' => 'Important legal information about our services, privacy policies, and your rights as a user of our platform.',
+            'feature1_title' => 'Privacy Policy',
+            'feature1_desc' => 'We protect your data and respect your privacy at all times.',
+            'feature1_emoji' => '🔐',
+            'feature2_title' => 'Terms of Service',
+            'feature2_desc' => 'Clear and fair terms that govern the use of our services.',
+            'feature2_emoji' => '📋',
+            'feature3_title' => 'GDPR Compliant',
+            'feature3_desc' => 'Fully compliant with international data protection regulations.',
+            'feature3_emoji' => '✅',
+            'cta_title' => 'Questions About Our Terms?',
+            'cta_button_text' => 'Contact Legal Team',
+        ],
+    ],
+    'portfolio_page' => [
+        'label' => 'Portfolio Page',
+        'description' => 'Showcasing Our Best Work',
+        'defaults' => [
+            'hero_title' => 'Our Portfolio',
+            'hero_subtitle' => 'Showcasing Our Best Work',
+            'hero_description' => "Explore our collection of successful projects and see how we've helped clients achieve their goals.",
+            'feature1_title' => 'Diverse Projects',
+            'feature1_desc' => 'Experience across multiple industries and project types.',
+            'feature1_emoji' => '🎨',
+            'feature2_title' => 'Proven Results',
+            'feature2_desc' => 'Measurable success and satisfied clients in every project.',
+            'feature2_emoji' => '📈',
+            'feature3_title' => 'Creative Excellence',
+            'feature3_desc' => 'Award-winning designs and innovative solutions.',
+            'feature3_emoji' => '🏆',
+            'cta_title' => 'Like What You See?',
+            'cta_button_text' => 'Start Your Project',
+        ],
+    ],
+    'pricing_page' => [
+        'label' => 'Pricing Page',
+        'description' => 'Transparent & Affordable Plans',
+        'defaults' => [
+            'hero_title' => 'Simple Pricing',
+            'hero_subtitle' => 'Transparent & Affordable Plans',
+            'hero_description' => 'Choose the perfect plan for your needs with no hidden fees, clear pricing, and flexible payment options.',
+            'feature1_title' => 'Flexible Plans',
+            'feature1_desc' => 'Monthly or yearly billing options to suit your budget.',
+            'feature1_emoji' => '💳',
+            'feature2_title' => 'No Hidden Fees',
+            'feature2_desc' => 'What you see is what you pay - complete transparency.',
+            'feature2_emoji' => '💰',
+            'feature3_title' => 'Easy Upgrades',
+            'feature3_desc' => 'Scale up or down anytime as your needs change.',
+            'feature3_emoji' => '📊',
+            'cta_title' => 'Ready to Choose a Plan?',
+            'cta_button_text' => 'View All Plans',
         ],
     ],
 ];
 
+$templates = [];
+
+function prettify_label(string $key): string
+{
+    return ucwords(str_replace('_', ' ', $key));
+}
+
+foreach ($templatePresets as $key => $preset) {
+    $fields = [];
+    foreach ($preset['defaults'] as $fieldName => $defaultValue) {
+        $fields[] = [
+            'name' => $fieldName,
+            'label' => prettify_label($fieldName),
+            'type' => str_contains($fieldName, 'desc') || str_contains($fieldName, 'description') ? 'textarea' : 'text',
+            'placeholder' => $defaultValue,
+        ];
+    }
+    $templates[$key] = [
+        'label' => $preset['label'],
+        'description' => $preset['description'],
+        'defaults' => $preset['defaults'],
+        'fields' => $fields,
+    ];
+}
+
 function sanitize_text(string $value): string
 {
     return htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8');
+}
+
+function hex_to_rgb(string $hex): array
+{
+    $hex = ltrim($hex, '#');
+    if (strlen($hex) === 3) {
+        $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+    }
+    if (strlen($hex) !== 6) {
+        return [0, 0, 0];
+    }
+
+    return [
+        hexdec(substr($hex, 0, 2)),
+        hexdec(substr($hex, 2, 2)),
+        hexdec(substr($hex, 4, 2)),
+    ];
 }
 
 function sanitize_slug(string $slug): string
@@ -120,91 +270,65 @@ function parse_lines(string $input): array
     return array_values(array_filter(array_map('trim', $lines), fn($line) => $line !== ''));
 }
 
-function build_template_content(string $template, array $data): string
+function build_template_content(string $template, array $data, array $templates, array $buttons): string
 {
-    switch ($template) {
-        case 'portfolio':
-            $projects = [];
-            foreach (parse_lines($data['portfolio_projects'] ?? '') as $line) {
-                [$title, $desc, $link] = array_pad(array_map('trim', explode('|', $line)), 3, '');
-                $projects[] = ['title' => sanitize_text($title), 'desc' => sanitize_text($desc), 'link' => sanitize_text($link)];
-            }
-            $about = sanitize_text($data['portfolio_about'] ?? '');
-            $projectMarkup = '';
-            foreach ($projects as $project) {
-                $linkPart = $project['link'] ? '<a href="' . $project['link'] . '" target="_blank" rel="noopener">Visit</a>' : '';
-                $projectMarkup .= "<div class='card'><h3>{$project['title']}</h3><p>{$project['desc']}</p>{$linkPart}</div>";
-            }
-            return "<section><h2>About</h2><p>{$about}</p></section><section><h2>Projects</h2><div class='grid'>{$projectMarkup}</div></section>";
-        case 'contact':
-            $email = sanitize_text($data['contact_email'] ?? '');
-            $phone = sanitize_text($data['contact_phone'] ?? '');
-            $address = sanitize_text($data['contact_address'] ?? '');
-            $headline = sanitize_text($data['contact_message'] ?? '');
-            $contactLines = '';
-            if ($email) {
-                $contactLines .= "<p><strong>Email:</strong> <a href='mailto:{$email}'>{$email}</a></p>";
-            }
-            if ($phone) {
-                $contactLines .= "<p><strong>Phone:</strong> {$phone}</p>";
-            }
-            if ($address) {
-                $contactLines .= "<p><strong>Address:</strong> {$address}</p>";
-            }
-            return "<section><h2>{$headline}</h2>{$contactLines}<p>We will get back to you quickly.</p></section>";
-        case 'imprint_privacy':
-            $imprint = nl2br(sanitize_text($data['imprint_body'] ?? ''));
-            $privacy = nl2br(sanitize_text($data['privacy_body'] ?? ''));
-            return "<section><h2>Imprint</h2><p>{$imprint}</p></section><section><h2>Privacy Policy</h2><p>{$privacy}</p></section>";
-        case 'product':
-            $name = sanitize_text($data['product_name'] ?? '');
-            $description = sanitize_text($data['product_description'] ?? '');
-            $features = parse_lines($data['product_features'] ?? '');
-            $price = sanitize_text($data['product_price'] ?? '');
-            $featureList = '';
-            foreach ($features as $feature) {
-                $featureList .= '<li>' . sanitize_text($feature) . '</li>';
-            }
-            return "<section class='hero'><h2>{$name}</h2><p>{$description}</p><p class='price'>{$price}</p></section><section><h3>Features</h3><ul>{$featureList}</ul></section>";
-        case 'pricing':
-            $plans = [];
-            foreach (parse_lines($data['pricing_plans'] ?? '') as $line) {
-                [$plan, $price, $features] = array_pad(array_map('trim', explode('|', $line)), 3, '');
-                $plans[] = [
-                    'plan' => sanitize_text($plan),
-                    'price' => sanitize_text($price),
-                    'features' => array_filter(array_map('trim', explode(';', $features)))
-                ];
-            }
-            $cta = sanitize_text($data['pricing_cta'] ?? '');
-            $planMarkup = '';
-            foreach ($plans as $plan) {
-                $featureItems = '';
-                foreach ($plan['features'] as $f) {
-                    $featureItems .= '<li>' . sanitize_text($f) . '</li>';
-                }
-                $planMarkup .= "<div class='card'><h3>{$plan['plan']}</h3><p class='price'>{$plan['price']}</p><ul>{$featureItems}</ul></div>";
-            }
-            return "<section><h2>Plans</h2><div class='grid'>{$planMarkup}</div><p class='cta'>{$cta}</p></section>";
-        case 'about':
-        default:
-            $story = sanitize_text($data['about_story'] ?? '');
-            $highlights = parse_lines($data['about_highlights'] ?? '');
-            $highlightList = '';
-            foreach ($highlights as $hl) {
-                $highlightList .= '<li>' . sanitize_text($hl) . '</li>';
-            }
-            return "<section><h2>About</h2><p>{$story}</p><ul>{$highlightList}</ul></section>";
+    $defaults = $templates[$template]['defaults'] ?? [];
+
+    $value = fn(string $key): string => sanitize_text($data[$key] ?? $defaults[$key] ?? '');
+
+    $ctaUrl = '#';
+    if (!empty($buttons[0]['url'])) {
+        $ctaUrl = sanitize_text($buttons[0]['url']);
     }
+
+    $features = [
+        [
+            'emoji' => $value('feature1_emoji'),
+            'title' => $value('feature1_title'),
+            'desc' => $value('feature1_desc'),
+        ],
+        [
+            'emoji' => $value('feature2_emoji'),
+            'title' => $value('feature2_title'),
+            'desc' => $value('feature2_desc'),
+        ],
+        [
+            'emoji' => $value('feature3_emoji'),
+            'title' => $value('feature3_title'),
+            'desc' => $value('feature3_desc'),
+        ],
+    ];
+
+    $featureCards = '';
+    foreach ($features as $feature) {
+        $featureCards .= "<div class='feature-card'><div class='feature-icon'>{$feature['emoji']}</div><div class='feature-title'>{$feature['title']}</div><div class='feature-description'>{$feature['desc']}</div></div>";
+    }
+
+    return "<div class='content-card'>"
+        . "<div class='hero-badge'><span class='hero-badge-dot'></span>" . sanitize_text($templates[$template]['label'] ?? 'Template') . "</div>"
+        . "<h1 class='page-title'>{$value('hero_title')}</h1>"
+        . "<p class='page-subtitle'>{$value('hero_subtitle')}</p>"
+        . "<p class='page-description'>{$value('hero_description')}</p>"
+        . "<div class='features-section'>"
+        . "<div class='features-grid'>{$featureCards}</div>"
+        . "</div>"
+        . "<div class='cta-section'>"
+        . "<div class='cta-title'>{$value('cta_title')}</div>"
+        . "<a class='btn' href='{$ctaUrl}' target='_blank' rel='noopener'>{$value('cta_button_text')}</a>"
+        . "</div>"
+        . "</div>";
 }
 
-function build_site_html(array $data, string $template, array $buttons, array $social, string $logoPath, string $favicon): string
+function build_site_html(array $data, string $template, array $buttons, array $social, string $logoPath, string $favicon, array $templates): string
 {
     $primary = sanitize_text($data['primary_color'] ?? '#00bcd4');
     $secondary = sanitize_text($data['secondary_color'] ?? '#8b5cf6');
-    $name = sanitize_text($data['name'] ?? 'Zilan Webgen');
+    $name = sanitize_text($data['name'] ?? 'NordByte Webgen');
     $title = sanitize_text($data['title'] ?? 'Title');
     $subtitle = sanitize_text($data['subtitle'] ?? 'Subtitle');
+
+    [$r1, $g1, $b1] = hex_to_rgb($primary);
+    [$r2, $g2, $b2] = hex_to_rgb($secondary);
 
     $buttonMarkup = '';
     foreach ($buttons as $button) {
@@ -214,13 +338,14 @@ function build_site_html(array $data, string $template, array $buttons, array $s
 
     $socialMarkup = '';
     foreach ($social as $item) {
-        $socialMarkup .= "<a href='{$item['url']}' target='_blank' rel='noopener'>{$item['label']}</a>";
+        $socialMarkup .= "<a class='social-link' href='{$item['url']}' target='_blank' rel='noopener'>{$item['label']}</a>";
     }
 
     $logoImg = $logoPath ? "<img class='logo' src='{$logoPath}' alt='Logo'>" : '';
+    $logoDisplay = $logoImg ?: '✨';
     $faviconLink = $favicon ? "<link rel='icon' href='{$favicon}'>" : '';
 
-    $templateContent = build_template_content($template, $data);
+    $templateContent = build_template_content($template, $data, $templates, $buttons);
 
     return <<<HTML
 <!doctype html>
@@ -231,41 +356,73 @@ function build_site_html(array $data, string $template, array $buttons, array $s
     <title>{$title}</title>
     {$faviconLink}
     <style>
-        :root { --primary: {$primary}; --secondary: {$secondary}; }
-        * { box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #0b1020; color: #e2e8f0; }
-        header { background: radial-gradient(circle at 20% 20%, rgba(0,188,212,0.18), transparent 35%), radial-gradient(circle at 80% 0%, rgba(139,92,246,0.18), transparent 35%), #0b1020; color: #fff; padding: 32px 24px; text-align: center; }
-        header h1 { margin: 8px 0; }
-        header p { margin: 0; opacity: 0.9; }
-        main { padding: 24px; max-width: 900px; margin: 0 auto; }
-        section { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35); border: 1px solid #1e293b; }
-        h2 { margin-top: 0; color: var(--primary); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-        .card { background: #0b1224; border: 1px solid #1e293b; border-radius: 10px; padding: 16px; }
-        .btn { display: inline-block; margin: 6px 6px 0 0; padding: 10px 16px; border-radius: 8px; color: #fff; text-decoration: none; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .social { margin-top: 10px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-        .logo { max-height: 60px; margin-bottom: 8px; }
-        .price { font-size: 22px; color: var(--secondary); font-weight: bold; }
-        ul { padding-left: 20px; }
-        .cta { font-weight: bold; color: var(--primary); text-align: center; }
-        .hero { text-align: center; }
-        .actions { margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .badge { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #e2e8f0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
-        .social a { color: #e2e8f0; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.06); text-decoration: none; }
+        :root{color-scheme:dark;--bg-primary:#0a0e1a;--bg-secondary:#0f172a;--panel-bg:rgba(15,23,42,0.6);--border:rgba(148,163,184,0.1);--accent-primary:{$primary};--accent-secondary:{$secondary};--text-primary:#f1f5f9;--text-muted:#94a3b8;--glow-primary:rgba({$r1},{$g1},{$b1},0.4);font-family:'Inter',-apple-system,system-ui,sans-serif}
+        *{box-sizing:border-box;margin:0;padding:0}
+        @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        body{margin:0;background:linear-gradient(135deg,#0a0e1a 0%,#0f2847 50%,#0f172a 100%);background-size:400% 400%;animation:gradientShift 15s ease infinite;color:var(--text-primary);min-height:100vh;padding:0;position:relative;overflow-x:hidden}
+        body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 20% 80%,rgba({$r1},{$g1},{$b1},0.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba({$r2},{$g2},{$b2},0.15) 0%,transparent 50%),radial-gradient(circle at 40% 40%,rgba({$r1},{$g1},{$b1},0.1) 0%,transparent 50%);animation:float 20s ease-in-out infinite;pointer-events:none;z-index:0}
+        #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+        .container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+        header{padding:2rem 0;animation:fadeInUp 0.8s ease-out}
+        .nav{display:flex;align-items:center;justify-content:space-between}
+        .actions{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:flex-end}
+        .logo-header{display:flex;align-items:center;gap:1rem}
+        .logo-icon{display:flex;align-items:center;justify-content:center;width:48px;height:48px;background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));border-radius:14px;box-shadow:0 8px 32px var(--glow-primary);font-size:1.5rem}
+        .logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent-primary) 0%,var(--accent-secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .back-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-weight:500;transition:all 0.3s ease;font-size:0.95rem}
+        .back-link:hover{color:var(--accent-secondary);transform:translateX(-4px)}
+        main{padding:3rem 0 6rem}
+        .content-card{background:var(--panel-bg);border:1px solid var(--border);border-radius:24px;padding:3rem;backdrop-filter:blur(24px);animation:fadeInUp 0.8s ease-out 0.2s both;text-align:center}
+        .page-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin:0 0 1rem;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--accent-primary) 0%,var(--accent-secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .page-subtitle{font-size:1.5rem;color:var(--text-primary);margin-bottom:1.5rem}
+        .page-description{font-size:1.125rem;color:var(--text-muted);line-height:1.7;max-width:700px;margin:0 auto}
+        .hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;background:rgba({$r1},{$g1},{$b1},0.1);border:1px solid rgba({$r1},{$g1},{$b1},0.3);border-radius:999px;font-size:0.875rem;font-weight:600;color:var(--accent-secondary);margin-bottom:2rem}
+        .hero-badge-dot{width:8px;height:8px;background:var(--accent-secondary);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+        .features-section{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--border)}
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:2rem}
+        .feature-card{background:var(--panel-bg);border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(24px);transition:all 0.3s ease}
+        .feature-card:hover{transform:translateY(-5px);border-color:rgba({$r1},{$g1},{$b1},0.3);box-shadow:0 20px 60px rgba({$r1},{$g1},{$b1},0.15)}
+        .feature-icon{width:48px;height:48px;background:rgba({$r1},{$g1},{$b1},0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;border:1px solid rgba({$r1},{$g1},{$b1},0.2);font-size:1.5rem}
+        .feature-title{font-size:1.25rem;font-weight:700;margin-bottom:0.5rem;color:var(--text-primary)}
+        .feature-description{font-size:0.95rem;color:var(--text-muted);line-height:1.6}
+        .cta-section{margin-top:4rem;padding:3rem;background:rgba({$r1},{$g1},{$b1},0.05);border:1px solid rgba({$r1},{$g1},{$b1},0.2);border-radius:24px}
+        .cta-title{font-size:2rem;font-weight:700;color:var(--text-primary);margin-bottom:2rem}
+        .btn{display:inline-flex;align-items:center;gap:0.75rem;padding:1rem 2rem;background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));color:white;border:none;border-radius:16px;font-weight:600;font-size:1rem;cursor:pointer;transition:all 0.3s;text-decoration:none}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba({$r1},{$g1},{$b1},0.5)}
+        footer{padding:3rem 0;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+        .social-links{display:flex;gap:1rem;justify-content:center;margin-bottom:1rem}
+        .social-link{color:var(--text-muted);text-decoration:none;font-weight:500;font-size:0.9rem;transition:color 0.3s ease}
+        .social-link:hover{color:var(--accent-secondary)}
+        .footer-text{color:var(--text-muted);font-size:0.95rem}
+        @media (max-width:768px){.content-card{padding:2rem 1.5rem}.features-grid{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
-    <header>
-        {$logoImg}
-        <p class="eyebrow">{$name}</p>
-        <h1>{$title}</h1>
-        <p>{$subtitle}</p>
-        <div class="actions">{$buttonMarkup}</div>
-        <div class="social">{$socialMarkup}</div>
-    </header>
-    <main>
-        {$templateContent}
-    </main>
+    <canvas id="bg-canvas"></canvas>
+    <div class="container">
+        <header>
+            <div class="nav">
+                <div class="logo-header">
+                    <div class="logo-icon">{$logoDisplay}</div>
+                    <div>
+                        <div class="logo-text">{$name}</div>
+                        <div class="page-subtitle" style="margin:0;font-size:1rem;">{$subtitle}</div>
+                    </div>
+                </div>
+                <div class="actions">{$buttonMarkup}</div>
+            </div>
+        </header>
+        <main>
+            {$templateContent}
+        </main>
+        <footer>
+            <div class="social-links">{$socialMarkup}</div>
+            <div class="footer-text">{$title}</div>
+        </footer>
+    </div>
 </body>
 </html>
 HTML;
@@ -304,7 +461,12 @@ $previewHtml = '';
 
 if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = array_map(fn($value) => is_string($value) ? trim($value) : $value, $_POST);
-    $template = $_POST['template'] ?? 'about';
+    $template = $_POST['template'] ?? array_key_first($templates);
+    if (!isset($templates[$template])) {
+        $template = array_key_first($templates);
+    }
+    $templateDefaults = $templates[$template]['defaults'] ?? [];
+    $data = array_merge($templateDefaults, $data);
     $buttons = gather_buttons();
     $social = gather_social();
     $slug = sanitize_slug($data['slug'] ?? 'site');
@@ -324,7 +486,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$logoPath && $logoUrl) {
             $logoPath = $logoUrl;
         }
-        $html = build_site_html($data, $template, $buttons, $social, $logoPath, $favicon);
+        $html = build_site_html($data, $template, $buttons, $social, $logoPath, $favicon, $templates);
         file_put_contents($targetDir . '/index.php', $html);
         add_owned_page_to_user($user['username'], $slug);
         $user = $_SESSION['user'];
@@ -335,19 +497,19 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$logoPath && $logoUrl) {
             $logoPath = $logoUrl;
         }
-        $previewHtml = build_site_html($data, $template, $buttons, $social, $logoPath, $favicon);
+        $previewHtml = build_site_html($data, $template, $buttons, $social, $logoPath, $favicon, $templates);
         $message = 'Preview updated. Use "Generate Site" to write files.';
     }
 } else {
-    $data = [
+    $template = array_key_first($templates);
+    $data = array_merge([
         'primary_color' => '#00bcd4',
         'secondary_color' => '#8b5cf6',
-        'template' => 'portfolio',
-        'name' => 'Zilan Webgen',
+        'template' => $template,
+        'name' => 'NordByte Webgen',
         'title' => 'Create your site',
-        'subtitle' => 'Cyan & Violet powered builder',
-    ];
-    $template = 'portfolio';
+        'subtitle' => $templates[$template]['description'] ?? 'Dynamic website generator',
+    ], $templates[$template]['defaults'] ?? []);
     $buttons = [];
     $social = [];
     $slug = '';
@@ -358,7 +520,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zilan Webgen</title>
+    <title>NordByte Webgen</title>
     <style>
         * { box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; margin: 0; background: #050815; color: #e2e8f0; }
@@ -394,7 +556,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header class="hero">
-    <h1>Zilan Webgen</h1>
+    <h1>NordByte Webgen</h1>
     <p class="small-note">Cyan/Violet themed website generator. Use the builder to preview and generate ./&lt;slug&gt;/index.php without any external backend.</p>
     <?php if ($user): ?>
         <div class="nav">
@@ -460,8 +622,8 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>Secondary color<input type="color" name="secondary_color" value="<?= htmlspecialchars($data['secondary_color'] ?? '#8b5cf6') ?>"></label>
         </div>
         <label>Logo upload<input type="file" name="logo_file" accept="image/*"></label>
-        <label>Logo URL (used if no upload provided)<input type="url" name="logo_url" value="<?= htmlspecialchars($data['logo_url'] ?? '') ?>" placeholder="https://example.com/logo.png"></label>
-        <label>Favicon URL<input type="url" name="favicon" value="<?= htmlspecialchars($data['favicon'] ?? '') ?>" placeholder="https://example.com/favicon.ico"></label>
+        <label>Logo URL (used if no upload provided)<input type="url" name="logo_url" value="<?= htmlspecialchars($data['logo_url'] ?? '') ?>" placeholder="https://webgen.quantixgroup.dev/logo.png"></label>
+        <label>Favicon URL<input type="url" name="favicon" value="<?= htmlspecialchars($data['favicon'] ?? '') ?>" placeholder="https://webgen.quantixgroup.dev/favicon.ico"></label>
 
         <div class="section-title">Template</div>
         <label>Choose template
@@ -491,7 +653,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" class="secondary" id="add-button">+ Add button</button>
 
         <div class="section-title">Social links</div>
-        <label>Email<input type="text" name="social_email" value="<?= htmlspecialchars($_POST['social_email'] ?? '') ?>" placeholder="you@example.com"></label>
+        <label>Email<input type="text" name="social_email" value="<?= htmlspecialchars($_POST['social_email'] ?? '') ?>" placeholder="contact@webgen.quantixgroup.dev"></label>
         <label>Discord user URL<input type="url" name="social_discord" value="<?= htmlspecialchars($_POST['social_discord'] ?? '') ?>" placeholder="https://discord.com/users/123456789">
             <div class="small-note">Use your Discord user URL (e.g., https://discord.com/users/&lt;id&gt;). Profile &gt; Copy User ID in Discord settings.</div>
         </label>
