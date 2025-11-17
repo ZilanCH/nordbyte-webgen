@@ -18,7 +18,7 @@ $templates = [
         'description' => 'Showcase your projects and background.',
         'fields' => [
             ['name' => 'portfolio_about', 'label' => 'About blurb', 'type' => 'textarea', 'placeholder' => 'Short introduction.'],
-            ['name' => 'portfolio_projects', 'label' => 'Projects (one per line as Title | Description | Link)', 'type' => 'textarea', 'placeholder' => 'Project One | What it does | https://example.com'],
+            ['name' => 'portfolio_projects', 'label' => 'Projects (one per line as Title | Description | Link)', 'type' => 'textarea', 'placeholder' => 'Project One | What it does | https://webgen.quantixgroup.dev'],
         ],
     ],
     'contact' => [
@@ -202,7 +202,7 @@ function build_site_html(array $data, string $template, array $buttons, array $s
 {
     $primary = sanitize_text($data['primary_color'] ?? '#00bcd4');
     $secondary = sanitize_text($data['secondary_color'] ?? '#8b5cf6');
-    $name = sanitize_text($data['name'] ?? 'Zilan Webgen');
+    $name = sanitize_text($data['name'] ?? 'NordByte Webgen');
     $title = sanitize_text($data['title'] ?? 'Title');
     $subtitle = sanitize_text($data['subtitle'] ?? 'Subtitle');
 
@@ -343,7 +343,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
         'primary_color' => '#00bcd4',
         'secondary_color' => '#8b5cf6',
         'template' => 'portfolio',
-        'name' => 'Zilan Webgen',
+        'name' => 'NordByte Webgen',
         'title' => 'Create your site',
         'subtitle' => 'Cyan & Violet powered builder',
     ];
@@ -358,7 +358,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zilan Webgen</title>
+    <title>NordByte Webgen</title>
     <style>
         * { box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; margin: 0; background: #050815; color: #e2e8f0; }
@@ -394,7 +394,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header class="hero">
-    <h1>Zilan Webgen</h1>
+    <h1>NordByte Webgen</h1>
     <p class="small-note">Cyan/Violet themed website generator. Use the builder to preview and generate ./&lt;slug&gt;/index.php without any external backend.</p>
     <?php if ($user): ?>
         <div class="nav">
@@ -460,8 +460,8 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>Secondary color<input type="color" name="secondary_color" value="<?= htmlspecialchars($data['secondary_color'] ?? '#8b5cf6') ?>"></label>
         </div>
         <label>Logo upload<input type="file" name="logo_file" accept="image/*"></label>
-        <label>Logo URL (used if no upload provided)<input type="url" name="logo_url" value="<?= htmlspecialchars($data['logo_url'] ?? '') ?>" placeholder="https://example.com/logo.png"></label>
-        <label>Favicon URL<input type="url" name="favicon" value="<?= htmlspecialchars($data['favicon'] ?? '') ?>" placeholder="https://example.com/favicon.ico"></label>
+        <label>Logo URL (used if no upload provided)<input type="url" name="logo_url" value="<?= htmlspecialchars($data['logo_url'] ?? '') ?>" placeholder="https://webgen.quantixgroup.dev/logo.png"></label>
+        <label>Favicon URL<input type="url" name="favicon" value="<?= htmlspecialchars($data['favicon'] ?? '') ?>" placeholder="https://webgen.quantixgroup.dev/favicon.ico"></label>
 
         <div class="section-title">Template</div>
         <label>Choose template
@@ -491,7 +491,7 @@ if ($user && $_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" class="secondary" id="add-button">+ Add button</button>
 
         <div class="section-title">Social links</div>
-        <label>Email<input type="text" name="social_email" value="<?= htmlspecialchars($_POST['social_email'] ?? '') ?>" placeholder="you@example.com"></label>
+        <label>Email<input type="text" name="social_email" value="<?= htmlspecialchars($_POST['social_email'] ?? '') ?>" placeholder="contact@webgen.quantixgroup.dev"></label>
         <label>Discord user URL<input type="url" name="social_discord" value="<?= htmlspecialchars($_POST['social_discord'] ?? '') ?>" placeholder="https://discord.com/users/123456789">
             <div class="small-note">Use your Discord user URL (e.g., https://discord.com/users/&lt;id&gt;). Profile &gt; Copy User ID in Discord settings.</div>
         </label>
