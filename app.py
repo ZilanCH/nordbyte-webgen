@@ -64,7 +64,7 @@ def ensure_admin_seed() -> None:
     password = generate_password_hash('admin123')
     db.execute(
         "INSERT INTO users (email, name, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)",
-        ('admin@example.com', 'Admin', password, 'admin', datetime.utcnow().isoformat()),
+        ('admin@webgen.quantixgroup.dev', 'NordByte Admin', password, 'admin', datetime.utcnow().isoformat()),
     )
     db.commit()
 
